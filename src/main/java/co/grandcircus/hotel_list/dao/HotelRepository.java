@@ -8,7 +8,8 @@ import co.grandcircus.hotel_list.entity.Hotel;
 
 public interface HotelRepository extends JpaRepository<Hotel, Long>{
 
-	List<Hotel> findAllByCityOrderByPricePerNight(String city);
+	List<Hotel> findAllByCityOrderByPricePerNight(String city);	
 	
 	
+	//List<Hotel> findAllByCityAndLessThanPricePerNightOrderByPricePerNight(String city, int price);
 }

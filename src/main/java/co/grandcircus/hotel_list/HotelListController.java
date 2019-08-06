@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import java.util.function.Predicate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,18 +34,30 @@ public class HotelListController {
 	
 	@PostMapping("/home")
 	public ModelAndView collectDropDown(
-			@RequestParam("city") String choice) {
+			@RequestParam("city") String choice,
+			@RequestParam("price") int maxPrice) {
 		
-		List<Hotel> result = hrDao.findAllByCityOrderByPricePerNight(choice);			
+		List<Hotel> result = hrDao.findAllByCityOrderByPricePerNight(choice);
+		
+		Predicate<Hotel> condition = hotel -> hotel.getPricePerNight() > maxPrice;
+        result.removeIf(condition);
 		return new ModelAndView("results", "hotels", result );
 		
 	}
+	
+	
 	
 	@RequestMapping("/results")
 	public ModelAndView showResults() {
 		return new ModelAndView("/result");
 	}
 	
+	@RequestMapping("/details")
+	public ModelAndView showDetails(Long id) {
+		
+		Hotel hotel = hDao.findById(id);		
+		return new ModelAndView("details", "hotel", hotel);
+	}
 	
 	
 }

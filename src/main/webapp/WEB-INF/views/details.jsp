@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Details</title>
 <link
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/yeti/bootstrap.min.css"
 	rel="stylesheet"
@@ -13,8 +12,9 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<div class="container">
-		<h1>Hotels in ${ hotels[0].city }</h1>
+
+	<h1>Hotel Name: ${ hotel.name } </h1>
+	<div class="container">		
 		<table class="table">
 			<thead>
 				<tr>
@@ -22,16 +22,16 @@
 					<th>Price</th>
 				</tr>
 			</thead>
-			<tbody>
-				<c:forEach var="hotel" items="${hotels}">
+			<tbody>				
 					<tr>
-						<td><a href="/details?id=${hotel.id}">${hotel.name}</a></td>
+						<td>${hotel.name}</td>
 						<td>${hotel.pricePerNight}</td>
 					</tr>
-				</c:forEach>
+				
 			</tbody>
 		</table>
 		<a href="redirect:/home" class="btn btn-primary">Home</a>
 	</div>
+	
 </body>
 </html>
